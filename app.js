@@ -32,6 +32,7 @@ const fileFilter = (req, file, cb) => {
 const MONGODB_URI = 'mongodb://localhost:27017/messages?readPreference=primary&ssl=false';
 
 const feedRoutes = require('./routes/feed');
+const authRoutes = require('./routes/auth');
 
 app.use(bodyParser.json());
 app.use(multer({ storage: fileStorage, fileFilter: fileFilter }).single('image'));
@@ -45,6 +46,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/feed', feedRoutes);
+app.use('/auth', authRoutes);
 
 app.use((error, req, res, next) => {
     console.log(error);
